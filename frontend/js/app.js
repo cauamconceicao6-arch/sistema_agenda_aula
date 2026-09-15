@@ -1,8 +1,7 @@
-// API Base dinâmica para funcionar tanto no XAMPP quanto no Laravel Herd
+// API Base dinâmica
 const basePath = window.location.pathname.substring(0, window.location.pathname.indexOf('/frontend/'));
 const API_BASE = window.location.origin + basePath + '/backend/index.php/api';
 
-// --- Utility Functions ---
 function showAlert(message, type = 'error', elementId = 'alert-box') {
     const alertBox = document.getElementById(elementId);
     if(!alertBox) return;
@@ -15,7 +14,7 @@ function getUser() {
     return JSON.parse(localStorage.getItem('agenda_user'));
 }
 
-// --- Login / Register Logic ---
+// logni
 if (window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/frontend/')) {
     let isLogin = true;
 
@@ -95,7 +94,6 @@ if (window.location.pathname.endsWith('index.html') || window.location.pathname.
     }
 }
 
-// --- Dashboard Logic ---
 if (window.location.pathname.endsWith('dashboard.html')) {
     const user = getUser();
     if (!user) {
@@ -112,7 +110,6 @@ if (window.location.pathname.endsWith('dashboard.html')) {
     const mainTitle = document.getElementById('main-title');
     const mainContent = document.getElementById('main-content');
     
-    // UI setup based on role
     if (user.role === 'instructor') {
         document.getElementById('instructor-actions').classList.replace('hidden', 'flex');
         
@@ -149,7 +146,7 @@ if (window.location.pathname.endsWith('dashboard.html')) {
             }
         });
 
-        loadInstructorClasses(); // Default view
+        loadInstructorClasses();
 
     } else {
         // Student logic
@@ -158,10 +155,9 @@ if (window.location.pathname.endsWith('dashboard.html')) {
         document.getElementById('btn-show-available-classes').addEventListener('click', loadAvailableClasses);
         document.getElementById('btn-show-my-bookings').addEventListener('click', loadMyBookings);
 
-        loadAvailableClasses(); // Default view
+        loadAvailableClasses();
     }
 
-    // --- Helper Functions for Views ---
 
     async function loadInstructorClasses() {
         mainTitle.textContent = "Minhas Aulas";
@@ -269,7 +265,6 @@ if (window.location.pathname.endsWith('dashboard.html')) {
     }
 }
 
-// Global functions for inline onclick handlers
 window.deleteClass = async function(id) {
     if(!confirm("Tem certeza que deseja excluir esta aula?")) return;
     try {

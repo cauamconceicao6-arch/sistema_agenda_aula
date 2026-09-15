@@ -24,11 +24,11 @@ class UserController {
 
             $stmt->bindParam(":name", $data->name);
             $stmt->bindParam(":email", $data->email);
-            // Hash da senha para segurança
+            // Hash da senha
             $password_hash = password_hash($data->password, PASSWORD_BCRYPT);
             $stmt->bindParam(":password", $password_hash);
             
-            // Validar o papel (role)
+            // Validar o role
             $role = in_array($data->role, ['student', 'instructor']) ? $data->role : 'student';
             $stmt->bindParam(":role", $role);
 
@@ -70,7 +70,7 @@ class UserController {
                 
                 if (password_verify($data->password, $row['password'])) {
                     http_response_code(200);
-                    // Como não estamos usando JWT, retornamos os dados básicos para o frontend guardar na sessão
+        
                     echo json_encode([
                         "message" => "Login realizado com sucesso.",
                         "user" => [

@@ -28,7 +28,7 @@ class ClassController {
     }
 
     private function getClasses() {
-        // Se houver um parâmetro instructor_id, filtramos por ele
+        // Se houver um parâmetro instructor_id, filtramos
         $instructor_id = isset($_GET['instructor_id']) ? $_GET['instructor_id'] : null;
 
         $query = "SELECT c.id, c.title, c.description, c.start_time, c.capacity, u.name as instructor_name 

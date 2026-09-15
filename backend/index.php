@@ -15,12 +15,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 // Obter a URI
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// Ajustar base_path caso o projeto não esteja na raiz do servidor web
-$base_path = '/sistema_agenda_aula/backend';
+// Ajustar base_path dinamicamente (Funciona para XAMPP e Laravel Herd)
+$script_path = dirname($_SERVER['SCRIPT_NAME']);
+$base_path = str_replace('\\', '/', $script_path);
 
 // Remover o base_path da URI para facilitar o roteamento
 if (strpos($uri, $base_path) === 0) {
     $uri = substr($uri, strlen($base_path));
+}
+
+// Remover '/index.php' caso a requisição venha diretamente pelo arquivo (sem .htaccess)
+if (strpos($uri, '/index.php') === 0) {
+    $uri = substr($uri, strlen('/index.php'));
 }
 
 // Definir rotas básicas

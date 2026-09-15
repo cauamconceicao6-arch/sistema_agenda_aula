@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema de Agendamento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4 text-white shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Sistema de Agendamento</h1>
+            <div class="flex items-center gap-4">
+                <span id="user-info" class="text-sm font-medium"></span>
+                <button id="logout-btn" class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-sm transition">Sair</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto mt-8 px-4 flex gap-6">
+        
+        <!-- Sidebar / Ações -->
+        <div class="w-1/4">
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <h2 class="text-lg font-bold mb-4 border-b pb-2">Ações</h2>
+                
+                <!-- Ações do Professor -->
+                <div id="instructor-actions" class="hidden flex-col gap-2">
+                    <button id="btn-show-create-class" class="bg-blue-500 text-white w-full py-2 rounded hover:bg-blue-600 transition">Nova Aula</button>
+                    <button id="btn-show-my-classes" class="bg-gray-200 text-gray-800 w-full py-2 rounded hover:bg-gray-300 transition">Minhas Aulas</button>
+                </div>
+
+                <!-- Ações do Aluno -->
+                <div id="student-actions" class="hidden flex-col gap-2">
+                    <button id="btn-show-available-classes" class="bg-green-500 text-white w-full py-2 rounded hover:bg-green-600 transition">Aulas Disponíveis</button>
+                    <button id="btn-show-my-bookings" class="bg-gray-200 text-gray-800 w-full py-2 rounded hover:bg-gray-300 transition">Meus Agendamentos</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="w-3/4">
+            <div id="alert-box-dashboard" class="hidden mb-4 p-3 rounded text-sm"></div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md min-h-[400px]">
+                <h2 id="main-title" class="text-2xl font-bold mb-6 text-gray-800">Bem-vindo(a)!</h2>
+                
+                <div id="main-content">
+                    <p class="text-gray-600">Selecione uma ação no menu ao lado.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Criar Aula (Professor) -->
+    <div id="create-class-modal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h3 class="text-xl font-bold mb-4">Criar Nova Aula</h3>
+            <form id="create-class-form">
+                <div class="mb-3">
+                    <label class="block text-sm font-bold mb-1">Título</label>
+                    <input type="text" id="class-title" class="border rounded w-full py-2 px-3" required>
+                </div>
+                <div class="mb-3">
+                    <label class="block text-sm font-bold mb-1">Descrição</label>
+                    <textarea id="class-desc" class="border rounded w-full py-2 px-3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="block text-sm font-bold mb-1">Data e Hora</label>
+                    <input type="datetime-local" id="class-time" class="border rounded w-full py-2 px-3" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-1">Capacidade de Alunos</label>
+                    <input type="number" id="class-capacity" class="border rounded w-full py-2 px-3" min="1" required>
+                </div>
+                <div class="flex justify-end gap-2">
+                    <button type="button" id="close-modal-btn" class="bg-gray-400 text-white px-4 py-2 rounded">Cancelar</button>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
